@@ -32,7 +32,7 @@
 #                   brew install imagemagick
 # If you do not have homebrew, please visit <http://brew.sh/>
 #
-# Instructions for Ubuntu: first, install librsvg and imagemagick using aptitude:
+# Instructions for Ubuntu: first, install librsvg and imagemagick using apt:
 #                   sudo apt-get update
 #                   sudo apt-get install imagemagick --fix-missing
 #                   sudo apt-get install librsvg2-bin
