@@ -4,7 +4,7 @@ Mobile developers face many challenges, including making sure that a mobile appl
 looks great no matter which device it is installed on. Have you ever had a difficult time
 making sure that your image assets are of a perfect size at all screen resolutions and pixel densities?
 
-At YouEye, we recently released our first mobile application, [YouEye for
+At [YouEye](https://www.youeye.com), we recently released our first mobile application, [YouEye for
 Participants](https://play.google.com/store/apps/details?id=com.youeye.recorders.android.web).
 The image below contains screenshots of the splash screen of the application running on
 a Nexus 10, a Nexus 7, and a Samsung Galaxy S4. Can you spot the problem? We could and we
