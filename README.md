@@ -25,7 +25,7 @@ Please note that the script is licensed under the [GPLv3](http://www.gnu.org/cop
 1. Simply clone this repository and place the easyassets.rb file in a directory where you would like to generate
 your image assets.
 2. Make sure you have Ruby installed
-3. Install librsvg and imagemagick via [homebrew](http://brew.sh/) or [apt](https://help.ubuntu.com/community/AptGet/Howto).
+3. Install librsvg, pngquant, and imagemagick via [homebrew](http://brew.sh/) or [apt](https://help.ubuntu.com/community/AptGet/Howto).
 4. Add your SVG file(s) to the directory. We recommend creating a 320 by 480 pixel canvas and placing the image in it.
 The allows the graphic designer to see how the image would be placed on a small Android or old iPhone screen. Don't worry,
 the extra whitespace will be trimmed for the final result.
