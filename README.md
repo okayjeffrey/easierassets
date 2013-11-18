@@ -40,7 +40,7 @@ the extra whitespace will be trimmed for the final result.
 or an iPhone 1/3/3GS screen. This option should only be used if your SVG does not have the correct size for these screens.
   * Multiple images can be passed to the script like so: `./easyassets.rb [image1].svg [image2].svg` or `/easyassets.rb *.svg`
 9. You will see a lot of text scrolling by in your terminal window. It will look something like this:
-![executing](http://i.imgur.com/GWsy1Jb.png)
+![executing](http://i.imgur.com/unmFeDz.png)
 10. You should now have plenty of directrories inside your working directory, each containing the proper size of the image(s)
 for the screen resolutions and densities.
 ![result](http://i.imgur.com/yur6Dek.png)
