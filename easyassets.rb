@@ -27,15 +27,17 @@
 # 4. Run the script, giving 320 and 480 as the last two arguments (or leave them both blank)
 # 5. The images will be generated in the directory that the script ran from
 
-# Instructions for OSX: first, install librsvg and imagemagick using homebrew:
+# Instructions for OSX: first, install librsvg, pngquant and imagemagick using homebrew:
 #                   brew install librsvg
-#                   brew install imagemagick
+#                   brew install pngquant
+#                   brew install imagemagick --with-librsvg
 # If you do not have homebrew, please visit <http://brew.sh/>
 #
-# Instructions for Ubuntu: first, install librsvg and imagemagick using apt:
+# Instructions for Ubuntu: first, install librsvg, pngquant and imagemagick using apt:
 #                   sudo apt-get update
-#                   sudo apt-get install imagemagick --fix-missing
 #                   sudo apt-get install librsvg2-bin
+#                   sudo apt-get install pngquant
+#                   sudo apt-get install imagemagick --fix-missing
 #
 # If you do not have ruby, please visit <https://www.ruby-lang.org/en/downloads/>
 #                                    or <http://railsinstaller.org/en>
@@ -100,22 +102,21 @@ if __FILE__==$0
         arguments = ARGV
         arguments.drop(1)
         
+        originalWidth = 0
+        originalHeight = 0
+        
         if ((Integer(ARGV[ARGV.length - 2]) rescue false) && (Integer(ARGV[ARGV.length - 1]) rescue false))
-            arguments.pop(2)
+            widthAndHeight = arguments.pop(2)
+            originalWidth = widthAndHeight[0].to_f
+            originalHeight = widthAndHeight[1].to_f
         end
         
         arguments.each do |originalFileNames|
             Dir[originalFileNames].each do |originalFileName|
                 outputFileName = File.basename(originalFileName, ".*") + ".png"
-                originalWidth = 0
-                originalHeight = 0
-                
                 puts "Converting %s to %s\n\n" % [originalFileName, outputFileName]
                 
-                if ((Integer(ARGV[ARGV.length - 2]) rescue false) || (Integer(ARGV[ARGV.length - 1]) rescue false))
-                    originalWidth = ARGV[ARGV.length - 2].to_f
-                    originalHeight = ARGV[ARGV.length - 1].to_f
-                    else
+                if (originalWidth == 0 || originalHeight == 0)
                     command = "identify #{originalFileName}"
                     puts "Run: #{command}\n\n"
                     identifyOutput = `#{command}`
@@ -131,6 +132,7 @@ if __FILE__==$0
                     outputHeight = originalHeight * ratio
                     outputWidth = outputWidth.to_i
                     outputHeight = outputHeight.to_i
+                    outputWidthHeight = "#{outputWidth}x#{outputHeight}\\!"
                     output = "./#{dir}/#{outputFileName}"
                     
                     # Make appropriate directory, if necessary
@@ -140,12 +142,17 @@ if __FILE__==$0
                     end
                     
                     # Convert svg to png
-                    command = "rsvg-convert -w #{outputWidth} -h #{outputHeight} #{originalFileName} -o #{output}"
+                    command = "convert -resize #{outputWidthHeight} -density 400 -depth 8 -strip -background none #{originalFileName} #{output}"
                     puts "Run: #{command}\n"
                     `#{command}`
                     
                     # Trim png whitespace
                     command = "convert -trim #{output} #{output}"
+                    puts "Run: #{command}\n"
+                    `#{command}`
+                    
+                    # Make filesize much smaller
+                    command = "pngquant -f #{output} -o #{output}"
                     puts "Run: #{command}\n\n"
                     `#{command}`
                 end
