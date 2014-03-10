@@ -44,13 +44,13 @@
 
 if __FILE__==$0
     if (ARGV.length < 1 || (!(Integer(ARGV[ARGV.length - 2]) rescue false) && (Integer(ARGV[ARGV.length - 1]) rescue false)))
-        puts "\nUsage: #{$0} [path/to/image].svg [sw320dp-width (optional)] [sw320dp-height (optional)]\n\n"
-        puts "Suggested workflow:"
-        puts "1. Create an SVG file with a canvas of size 320 by 480 pixels"
-        puts "2. Draw your vectors on this canvas"
-        puts "3. Save the image as image_name.svg"
-        puts "4. Run the script, giving 320 and 480 as the last two arguments (or leave them both blank)"
-        puts "5. The images will be generated in the directory that the script ran from\n\n"
+        # puts "\nUsage: #{$0} [path/to/image].svg [sw320dp-width (optional)] [sw320dp-height (optional)]\n\n"
+        # puts "Suggested workflow:"
+        # puts "1. Create an SVG file with a canvas of size 320 by 480 pixels"
+        # puts "2. Draw your vectors on this canvas"
+        # puts "3. Save the image as image_name.svg"
+        # puts "4. Run the script, giving 320 and 480 as the last two arguments (or leave them both blank)"
+        # puts "5. The images will be generated in the directory that the script ran from\n\n"
         else
         # Android:
         # ldpi:mdpi:hdpi:xhdpi:xxhdpi ratios are 3:4:6:8:12
@@ -117,23 +117,28 @@ if __FILE__==$0
 
                 strippedFileName = File.basename(originalFileName, ".*")
                 outputFileName = File.basename(originalFileName, ".*") + ".png"
-                puts "Converting %s to %s\n\n" % [originalFileName, outputFileName]
+                # puts "Converting %s to %s\n\n" % [originalFileName, outputFileName]
 
                 if (originalWidth == 0 || originalHeight == 0)
                     command = "identify #{originalFileName}"
-                    puts "Run: #{command}\n\n"
+                    # puts "Run: #{command}\n\n"
                     identifyOutput = `#{command}`
                     identifyOutput = identifyOutput.split[3].split("x")
                     originalWidth = identifyOutput[0].to_f
                     originalHeight = identifyOutput[1].to_f
                 end
 
-                puts "Scaling from width %s and height %s\n\n" % [originalWidth, originalHeight]
+                # puts "Scaling from width %s and height %s\n\n" % [originalWidth, originalHeight]
 
-                output_dir = "#{File.dirname(originalFileName)}/assets"
-                Dir.mkdir(output_dir)
+                output_dir = "#{File.dirname(originalFileName)}/droid_assets"
+                require 'fileutils'
+                FileUtils::mkdir_p(output_dir)
+                FileUtils.chmod 0777, output_dir
+                # Dir.mkdir(output_dir)
 
                 scaleRatios.each do |dir, ratio|
+                    final_dir = "#{output_dir}/#{dir}"
+                  # puts [final_dir]
                     outputWidth = originalWidth * ratio
                     outputHeight = originalHeight * ratio
                     outputWidth = outputWidth.to_i
@@ -144,23 +149,24 @@ if __FILE__==$0
 
                     # Make appropriate directory, if necessary
                     unless File.exists?(dir)
-                        puts "Making directory: ./#{dir}/\n"
-                        Dir.mkdir(dir)
+                        # # puts "Making directory: ./#{dir}/\n"
+                        FileUtils::mkdir_p(final_dir)
+                        # Dir.mkdir(dir)
                     end
 
                     # Convert svg to png
                     command = "convert -resize #{outputWidthHeight} -density 400 -depth 8 -strip -background none #{originalFileName} #{output}"
-                    puts "Run: #{command}\n"
+                    # # puts "Run: #{command}\n"
                     `#{command}`
 
                     # Trim png whitespace
                     command = "convert -trim #{output} #{output}"
-                    puts "Run: #{command}\n"
+                    # puts "Run: #{command}\n"
                     `#{command}`
 
                     # Make filesize much smaller
                     command = "pngquant -f #{output} -o #{output}"
-                    puts "Run: #{command}\n\n"
+                    # puts "Run: #{command}\n\n"
                     `#{command}`
                 end
             end
