@@ -69,11 +69,18 @@ if __FILE__==$0
         # iphone1:iphone4:iphone5:ipad:ipad3 ratios are 5:10:10:16:32
         # mdpi:iphone1 ratio is 1:1
 
-        scaleRatios = {"drawable-ldpi" => 0.75,
-            "drawable-mdpi" => 1.0,
-            "drawable-hdpi" => 1.5,
-            "drawable-xhdpi" => 2.0,
-            "drawable-xxhdpi" => 3.0#,
+        scaleRatios = {
+            # "drawable-ldpi" => 0.75,
+# ---------- Default using mdpi as base
+            # "drawable-mdpi" => 1.0,
+            # "drawable-hdpi" => 1.5,
+            # "drawable-xhdpi" => 2.0,
+            # "drawable-xxhdpi" => 3.0#,
+# ---------- When you design at xhdpi this is now your base
+            "drawable-mdpi" => 0.5,
+            "drawable-hdpi" => 0.75,
+            "drawable-xhdpi" => 1.0,
+            "drawable-xxhdpi" => 1.5#,
             # "drawable-sw360dp-ldpi" => 0.84375,
             # "drawable-sw360dp-mdpi" => 1.125,
             # "drawable-sw360dp-hdpi" => 1.6875,
@@ -160,9 +167,9 @@ if __FILE__==$0
                     `#{command}`
 
                     # Trim png whitespace
-                    command = "convert -trim #{output} #{output}"
+                    # command = "convert -trim #{output} #{output}"
                     # puts "Run: #{command}\n"
-                    `#{command}`
+                    # `#{command}`
 
                     # Make filesize much smaller
                     command = "pngquant -f #{output} -o #{output}"
