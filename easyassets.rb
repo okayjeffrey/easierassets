@@ -1,47 +1,5 @@
 #!/usr/bin/env ruby
 
-# SVG to PNG easy image asset converter
-# Copyright (c) 2013, YouEye, Inc. www.youeye.com <support@youeye.com>
-# Developed by Borys Boyko, Application Engineer
-# All rights reserved.
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-# Usage: ./easyassets.rb [path/to/image].svg [sw320dp-width (optional)] [sw320dp-height (optional)]
-#
-# Suggested workflow:
-# 1. Create an SVG file with a canvas of size 320 x 480 pixels
-# 2. Draw your vectors on this canvas
-# 3. Save the image as image_name.svg
-# 4. Run the script, giving 320 and 480 as the last two arguments (or leave them both blank)
-# 5. The images will be generated in the directory that the script ran from
-
-# Instructions for OSX: first, install librsvg, pngquant and imagemagick using homebrew:
-#                   brew install librsvg
-#                   brew install pngquant
-#                   brew install imagemagick --with-librsvg
-# If you do not have homebrew, please visit <http://brew.sh/>
-#
-# Instructions for Ubuntu: first, install librsvg, pngquant and imagemagick using apt:
-#                   sudo apt-get update
-#                   sudo apt-get install librsvg2-bin
-#                   sudo apt-get install pngquant
-#                   sudo apt-get install imagemagick --fix-missing
-#
-# If you do not have ruby, please visit <https://www.ruby-lang.org/en/downloads/>
-#                                    or <http://railsinstaller.org/en>
-
 if __FILE__==$0
     if (ARGV.length < 1 || (!(Integer(ARGV[ARGV.length - 2]) rescue false) && (Integer(ARGV[ARGV.length - 1]) rescue false)))
         # puts "\nUsage: #{$0} [path/to/image].svg [sw320dp-width (optional)] [sw320dp-height (optional)]\n\n"

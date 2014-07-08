@@ -35,4 +35,9 @@ for the screen resolutions and densities.
 Here is an example of a drawable-mdpi and a drawable-xxhdpi image:
 ![mdpivsxxhdpi](http://i.imgur.com/q9Hpwgb.png)
 
+# Usage:
+
+$ ./easyassets.rb [path/to/image].svg [sw320dp-width (optional)] [sw320dp-height (optional)]
+
+
 ### Enjoy!
