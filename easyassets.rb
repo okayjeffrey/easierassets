@@ -80,7 +80,9 @@ if __FILE__==$0
             "drawable-mdpi" => 0.5,
             "drawable-hdpi" => 0.75,
             "drawable-xhdpi" => 1.0,
-            "drawable-xxhdpi" => 1.5#,
+            "drawable-xxhdpi" => 1.5,
+            "iphone2x" => 1.0,
+            "iphone" => 0.5#,
             # "drawable-sw360dp-ldpi" => 0.84375,
             # "drawable-sw360dp-mdpi" => 1.125,
             # "drawable-sw360dp-hdpi" => 1.6875,
@@ -102,7 +104,7 @@ if __FILE__==$0
             # "drawable-sw720dp-xhdpi" => 4.5,
             # "drawable-sw720dp-xxhdpi" => 6.75,
             # "iphone1_3g_3gs" => 1.0,
-            # "iphone4_4s_5_5s" => 2.0,
+            # "iphone4_4s_5_5s" => 2.0#,
             # "ipad1_2_mini" => 3.2,
             # "ipad3_4_air" => 6.4
           }
